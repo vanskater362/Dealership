@@ -2,10 +2,13 @@ package com.cardealership;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.ArrayAdapter;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Switch;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -43,15 +46,65 @@ public class MainActivity extends AppCompatActivity {
         Spinner colorSpinner = (Spinner) findViewById(R.id.colorSpinner);
         EditText priceText = (EditText) findViewById(R.id.editPrice);
         EditText milesText = (EditText) findViewById(R.id.editMiles);
-        Switch sunroof = (Switch) findViewById(R.id.sunSwitch);
-        Switch drive = (Switch) findViewById(R.id.fourwdSwitch);
-        Switch window = (Switch) findViewById(R.id.windowSwitch);
-        Switch navi = (Switch) findViewById(R.id.naviSwitch);
-        Switch hotSeats = (Switch) findViewById(R.id.hotSwitch);
+        final Switch sunroof = (Switch) findViewById(R.id.sunSwitch);
+        final Switch drive = (Switch) findViewById(R.id.fourwdSwitch);
+        final Switch window = (Switch) findViewById(R.id.windowSwitch);
+        final Switch navi = (Switch) findViewById(R.id.naviSwitch);
+        final Switch hotSeats = (Switch) findViewById(R.id.hotSwitch);
 
         makeSpinner.setAdapter(makesAdapter);
         yearSpinner.setAdapter(yearAdapter);
         colorSpinner.setAdapter(colorAdapter);
+
+        sunroof.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if(b)
+                    sunroof.setText(R.string.yes);
+                if(!b)
+                    sunroof.setText(R.string.no);
+            }
+        });
+
+        drive.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if(b)
+                    drive.setText(R.string.yes);
+                if(!b)
+                    drive.setText(R.string.no);
+            }
+        });
+
+        window.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if(b)
+                    window.setText(R.string.yes);
+                if(!b)
+                    window.setText(R.string.no);
+            }
+        });
+
+        navi.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if(b)
+                    navi.setText(R.string.yes);
+                if(!b)
+                    navi.setText(R.string.no);
+            }
+        });
+
+        hotSeats.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if(b)
+                    hotSeats.setText(R.string.yes);
+                if(!b)
+                    hotSeats.setText(R.string.no);
+            }
+        });
 
     }
 
