@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -29,16 +30,13 @@ public class MainActivity extends AppCompatActivity {
         fillColors(colorArray);
 
 
-        ArrayAdapter<String> makesAdapter = new ArrayAdapter<String>(
-                this, android.R.layout.simple_spinner_item, makesArray);
+        HintAdapter makesAdapter = new HintAdapter(this, makesArray, android.R.layout.simple_spinner_item);
         makesAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
-        ArrayAdapter<String> yearAdapter = new ArrayAdapter<String>(
-                this, android.R.layout.simple_spinner_item, yearArray);
+        HintAdapter yearAdapter = new HintAdapter(this, yearArray, android.R.layout.simple_spinner_item);
         yearAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
-        ArrayAdapter<String> colorAdapter = new ArrayAdapter<String>(
-                this, android.R.layout.simple_spinner_item, colorArray);
+        HintAdapter colorAdapter = new HintAdapter(this, colorArray, android.R.layout.simple_spinner_item);
         colorAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
         Spinner makeSpinner = (Spinner) findViewById(R.id.makeSpinner);
@@ -53,8 +51,11 @@ public class MainActivity extends AppCompatActivity {
         final Switch hotSeats = (Switch) findViewById(R.id.hotSwitch);
 
         makeSpinner.setAdapter(makesAdapter);
+        makeSpinner.setSelection(makesAdapter.getCount());
         yearSpinner.setAdapter(yearAdapter);
+        yearSpinner.setSelection(yearAdapter.getCount());
         colorSpinner.setAdapter(colorAdapter);
+        colorSpinner.setSelection(colorAdapter.getCount());
 
         sunroof.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -111,15 +112,18 @@ public class MainActivity extends AppCompatActivity {
     void fillMakes(List<String> makesArray) {
         makesArray.add("Make 1");
         makesArray.add("Make 2");
+        makesArray.add("Select Make");
     }
 
     void fillYears(List<String> yearArray) {
         yearArray.add("Year 1");
         yearArray.add("Year 2");
+        yearArray.add("Select Year");
     }
 
     void fillColors(List<String> colorArray){
         colorArray.add("Color 1");
         colorArray.add("Color 2");
+        colorArray.add("Select Color");
     }
 }
