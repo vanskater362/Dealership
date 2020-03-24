@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">CarDealership</string>
+    <string name="searchButton">Search</string>
+    <string name="make">Make</string>
+    <string name="year">Year</string>
+    <string name="color">Color</string>
+    <string name="sunroof">Sunroof</string>
+    <string name="price">Price</string>
+    <string name="fourwd">Four Wheel Drive</string>
+    <string name="lowMiles">Number of Miles</string>
+    <string name="powerWindows">Power Windows</string>
+    <string name="navi">Navigation</string>
+    <string name="hotSeats">Heated Seats</string>
+    <string name="no">No</string>
+    <string name="yes">Yes</string>
+    <string name="numHint">123456</string>
+</resources>
