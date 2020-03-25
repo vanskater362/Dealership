@@ -1,5 +1,7 @@
 package com.cardealership;
 
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -11,23 +13,27 @@ import android.widget.Switch;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity {
+
+    DatabaseHelper db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        List<String> makesArray =  new ArrayList<String>();
-        List<String> yearArray =  new ArrayList<String>();
-        List<String> colorArray =  new ArrayList<String>();
 
-        fillMakes(makesArray);
-        fillYears(yearArray);
-        fillColors(colorArray);
+        db = new DatabaseHelper(this);
+
+        db.fillDB();
+
+        List<String> makesArray = fillMakes(); //only fill the drop down menu with avaiable makes
+        List<String> yearArray =  fillYears(); //only fill the drop down menu with avaiable Years
+        List<String> colorArray =  fillColors(); //only fill the dropdown menu with avaiable Colors
 
 
         HintAdapter makesAdapter = new HintAdapter(this, makesArray, android.R.layout.simple_spinner_item);
@@ -109,21 +115,39 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    void fillMakes(List<String> makesArray) {
-        makesArray.add("Make 1");
-        makesArray.add("Make 2");
-        makesArray.add("Select Make");
+    List<String> fillMakes() {
+        HashSet<String> makesArray =  db.getMakes();
+        List<String> makes = new ArrayList<>();
+        Object[] obj = makesArray.toArray();
+
+        for(int i = 0; i < obj.length; i++) {
+            makes.add(obj[i].toString());
+        }
+        makes.add("Select Make");
+        return makes;
     }
 
-    void fillYears(List<String> yearArray) {
-        yearArray.add("Year 1");
-        yearArray.add("Year 2");
-        yearArray.add("Select Year");
+    List<String> fillYears() {
+        HashSet<String> yearsArray =  db.getYears();
+        List<String> years = new ArrayList<>();
+        Object[] obj = yearsArray.toArray();
+
+        for(int i = 0; i < obj.length; i++) {
+            years.add(obj[i].toString());
+        }
+        years.add("Select Year");
+        return years;
     }
 
-    void fillColors(List<String> colorArray){
-        colorArray.add("Color 1");
-        colorArray.add("Color 2");
-        colorArray.add("Select Color");
+    List<String> fillColors(){
+        HashSet<String> colorsArray =  db.getColors();
+        List<String> colors = new ArrayList<>();
+        Object[] obj = colorsArray.toArray();
+
+        for(int i = 0; i < obj.length; i++) {
+            colors.add(obj[i].toString());
+        }
+        colors.add("Select Color");
+        return colors;
     }
 }
