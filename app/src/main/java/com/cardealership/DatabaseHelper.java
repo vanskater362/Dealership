@@ -45,6 +45,36 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         onCreate(db);
     }
 
+    public List<Cars> getSearched(String query){
+        List<Cars> cars = new ArrayList<>();
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        Cursor cursor = db.rawQuery(query, null);
+
+        if(cursor.moveToFirst()) {
+            do {
+                Cars car = new Cars();
+
+                car.setId(cursor.getInt(cursor.getColumnIndex(Cars.COLUMN_ID)));
+                car.set_Id(cursor.getString(cursor.getColumnIndex(Cars.COLUMN__ID)));
+                car.setMake(cursor.getString(cursor.getColumnIndex(Cars.COLUMN_MAKE)));
+                car.setYear(cursor.getString(cursor.getColumnIndex(Cars.COLUMN_YEAR)));
+                car.setColor(cursor.getString(cursor.getColumnIndex(Cars.COLUMN_COLOR)));
+                car.setPrice(cursor.getString(cursor.getColumnIndex(Cars.COLUMN_PRICE)));
+                car.setHasSunroof(cursor.getInt(cursor.getColumnIndex(Cars.COLUMN_HASSUNROOF)));
+                car.setIsFourWheelDrive(cursor.getInt(cursor.getColumnIndex(Cars.COLUMN_ISFOURWHEELDRIVE)));
+                car.setHasLowMiles(cursor.getInt(cursor.getColumnIndex(Cars.COLUMN_HASLOWMILES)));
+                car.setHasPowerWindows(cursor.getInt(cursor.getColumnIndex(Cars.COLUMN_HASPOWERWINDOWS)));
+                car.setHasNavigation(cursor.getInt(cursor.getColumnIndex(Cars.COLUMN_HASNAVIGATION)));
+                car.setHasHeatedSeats(cursor.getInt(cursor.getColumnIndex(Cars.COLUMN_HASHEATEDSEATS)));
+
+                cars.add(car);
+            } while (cursor.moveToNext());
+        }
+
+        return cars;
+    }
+
     public List<Cars> getAllCars() {
         List<Cars> cars = new ArrayList<>();
 
@@ -125,6 +155,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         return colors;
     }
+
+
 
     public void fillDB(){
         //data for the database

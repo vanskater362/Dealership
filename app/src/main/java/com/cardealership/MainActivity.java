@@ -46,9 +46,9 @@ public class MainActivity extends AppCompatActivity {
         HintAdapter colorAdapter = new HintAdapter(this, colorArray, android.R.layout.simple_spinner_item);
         colorAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
-        Spinner makeSpinner = (Spinner) findViewById(R.id.makeSpinner);
-        Spinner yearSpinner = (Spinner) findViewById(R.id.yearSpinner);
-        Spinner colorSpinner = (Spinner) findViewById(R.id.colorSpinner);
+        final Spinner makeSpinner = (Spinner) findViewById(R.id.makeSpinner);
+        final Spinner yearSpinner = (Spinner) findViewById(R.id.yearSpinner);
+        final Spinner colorSpinner = (Spinner) findViewById(R.id.colorSpinner);
         EditText priceText = (EditText) findViewById(R.id.editPrice);
         EditText milesText = (EditText) findViewById(R.id.editMiles);
         final Switch sunroof = (Switch) findViewById(R.id.sunSwitch);
@@ -68,7 +68,16 @@ public class MainActivity extends AppCompatActivity {
         search.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(MainActivity.this, Results.class));
+                Intent i = new Intent(MainActivity.this, Results.class);
+                String make = makeSpinner.getSelectedItem().toString();
+                String year = yearSpinner.getSelectedItem().toString();
+                String color = colorSpinner.getSelectedItem().toString();
+                String query = buildSearchQuery(make, year, color);
+
+                List<Cars> car = db.getSearched(query);
+                Log.d("cars", car.toString());
+                //i.putExtra("cars", car);
+                startActivity(i);
             }
         });
 
@@ -158,5 +167,31 @@ public class MainActivity extends AppCompatActivity {
         }
         colors.add("Select Color");
         return colors;
+    }
+
+    String buildSearchQuery(String  make, String year, String color){
+        String select = "SELECT * ";
+        String where = " WHERE ";
+        String regex = "(, FROM)";
+        //check for hint text
+        if(!make.startsWith("Select")){
+            //select += Cars.COLUMN_MAKE + ", ";
+            where += Cars.COLUMN_MAKE + " = '" + make + "' AND ";
+        }
+        if(!year.startsWith("Select")) {
+            //select += Cars.COLUMN_YEAR + ", ";
+            where += Cars.COLUMN_YEAR + " = '" + year + "' AND ";
+        }
+        if(!color.startsWith("Select")){
+            //select += Cars.COLUMN_COLOR + ", ";
+            where += Cars.COLUMN_COLOR + " = '" + color + "' AND ";
+        }
+
+        //select = select.substring(0, select.length() - 2); //remove ", " before adding the next part of the query
+        select += " FROM " + Cars.TABLE_NAME;
+        where = where.substring(0, where.length() - 5); //remove " AND " before adding the next part of the query
+
+
+        return select+where;
     }
 }
