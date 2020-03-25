@@ -1,11 +1,14 @@
 package com.cardealership;
 
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.Spinner;
@@ -26,16 +29,14 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
         db = new DatabaseHelper(this);
-
-        db.fillDB();
+        db.fillDB(); //TODO need to find a way to only run once
 
         List<String> makesArray = fillMakes(); //only fill the drop down menu with avaiable makes
         List<String> yearArray =  fillYears(); //only fill the drop down menu with avaiable Years
         List<String> colorArray =  fillColors(); //only fill the dropdown menu with avaiable Colors
 
-
+        //Set the hint but make it not a selection
         HintAdapter makesAdapter = new HintAdapter(this, makesArray, android.R.layout.simple_spinner_item);
         makesAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
@@ -55,6 +56,7 @@ public class MainActivity extends AppCompatActivity {
         final Switch window = (Switch) findViewById(R.id.windowSwitch);
         final Switch navi = (Switch) findViewById(R.id.naviSwitch);
         final Switch hotSeats = (Switch) findViewById(R.id.hotSwitch);
+        Button search = findViewById(R.id.searchButton);
 
         makeSpinner.setAdapter(makesAdapter);
         makeSpinner.setSelection(makesAdapter.getCount());
@@ -62,6 +64,13 @@ public class MainActivity extends AppCompatActivity {
         yearSpinner.setSelection(yearAdapter.getCount());
         colorSpinner.setAdapter(colorAdapter);
         colorSpinner.setSelection(colorAdapter.getCount());
+
+        search.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(MainActivity.this, Results.class));
+            }
+        });
 
         sunroof.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override

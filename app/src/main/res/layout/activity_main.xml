@@ -265,4 +265,54 @@
         android:orientation="vertical"
         app:layout_constraintGuide_percent="0.05109489" />
 
+    <CheckBox
+        android:id="@+id/sunBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:text="@string/include"
+        app:layout_constraintStart_toEndOf="@+id/sunSwitch"
+        app:layout_constraintTop_toTopOf="@+id/sunSwitch" />
+
+    <CheckBox
+        android:id="@+id/driveBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:text="@string/include"
+        app:layout_constraintStart_toEndOf="@+id/fourwdSwitch"
+        app:layout_constraintTop_toTopOf="@+id/fourwdSwitch" />
+
+    <CheckBox
+        android:id="@+id/powerBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:text="@string/include"
+        app:layout_constraintStart_toEndOf="@+id/windowSwitch"
+        app:layout_constraintTop_toTopOf="@+id/windowSwitch" />
+
+    <CheckBox
+        android:id="@+id/naviBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:text="@string/include"
+        app:layout_constraintStart_toEndOf="@+id/naviSwitch"
+        app:layout_constraintTop_toTopOf="@+id/naviSwitch" />
+
+    <CheckBox
+        android:id="@+id/heatBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:text="@string/include"
+        app:layout_constraintStart_toEndOf="@+id/hotSwitch"
+        app:layout_constraintTop_toTopOf="@+id/hotSwitch" />
+
 </android.support.constraint.ConstraintLayout>
