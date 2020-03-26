@@ -14,4 +14,5 @@
     <string name="no">No</string>
     <string name="yes">Yes</string>
     <string name="numHint">123456</string>
+    <string name="include">Include?</string>
 </resources>

@@ -18,19 +18,6 @@
         app:layout_constraintTop_toBottomOf="@+id/hotSwitch" />
 
     <EditText
-        android:id="@+id/editMiles"
-        android:layout_width="138dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:ems="10"
-        android:hint="@string/numHint"
-        android:importantForAutofill="no"
-        android:inputType="number"
-        app:layout_constraintBottom_toBottomOf="@+id/milesText"
-        app:layout_constraintStart_toStartOf="@+id/guideline" />
-
-    <EditText
         android:id="@+id/editPrice"
         android:layout_width="146dp"
         android:layout_height="wrap_content"
@@ -194,22 +181,7 @@
         android:layout_marginRight="16dp"
         android:text="@string/sunroof"
         app:layout_constraintEnd_toStartOf="@+id/guideline"
-        app:layout_constraintHorizontal_bias="0.52"
-        app:layout_constraintStart_toStartOf="@+id/guideline2"
-        app:layout_constraintTop_toBottomOf="@+id/milesText" />
-
-    <TextView
-        android:id="@+id/milesText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginTop="40dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginRight="16dp"
-        android:text="@string/lowMiles"
-        app:layout_constraintEnd_toStartOf="@+id/guideline"
-        app:layout_constraintHorizontal_bias="0.4"
+        app:layout_constraintHorizontal_bias="0.41"
         app:layout_constraintStart_toStartOf="@+id/guideline2"
         app:layout_constraintTop_toBottomOf="@+id/priceText" />
 
@@ -264,5 +236,55 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layout_constraintGuide_percent="0.05109489" />
+
+    <CheckBox
+        android:id="@+id/sunBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:text="@string/include"
+        app:layout_constraintStart_toEndOf="@+id/sunSwitch"
+        app:layout_constraintTop_toTopOf="@+id/sunSwitch" />
+
+    <CheckBox
+        android:id="@+id/driveBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:text="@string/include"
+        app:layout_constraintStart_toEndOf="@+id/fourwdSwitch"
+        app:layout_constraintTop_toTopOf="@+id/fourwdSwitch" />
+
+    <CheckBox
+        android:id="@+id/powerBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:text="@string/include"
+        app:layout_constraintStart_toEndOf="@+id/windowSwitch"
+        app:layout_constraintTop_toTopOf="@+id/windowSwitch" />
+
+    <CheckBox
+        android:id="@+id/naviBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:text="@string/include"
+        app:layout_constraintStart_toEndOf="@+id/naviSwitch"
+        app:layout_constraintTop_toTopOf="@+id/naviSwitch" />
+
+    <CheckBox
+        android:id="@+id/heatBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:text="@string/include"
+        app:layout_constraintStart_toEndOf="@+id/hotSwitch"
+        app:layout_constraintTop_toTopOf="@+id/hotSwitch" />
 
 </android.support.constraint.ConstraintLayout>
