@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import java.util.List;
 
+//with a little modification this class can be modified to accept a JSON string
 public class CarAdapter extends RecyclerView.Adapter<CarAdapter.ViewHolder> {
     private List<Cars> mData;
     private LayoutInflater mInflater;

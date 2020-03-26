@@ -87,7 +87,7 @@ public class MainActivity extends AppCompatActivity {
                         naviBox.isChecked(),hotBox.isChecked());
 
                 List<Cars> car = db.getSearched(query);
-                IntentHelper.addObjectForKey(car, "Cars");
+                IntentHelper.addObjectForKey(car, "Cars"); //used to move the Cars obj
 
                 //i.putExtra("Cars", car);
                 startActivity(i);
@@ -228,6 +228,6 @@ public class MainActivity extends AppCompatActivity {
         where = where.substring(0, where.length() - 5); //remove " AND " before adding the next part of the query
 
 
-        return select+where;
+        return select+where; //SELECT * FROM table WHERE "any variable set" = what was selected
     }
 }

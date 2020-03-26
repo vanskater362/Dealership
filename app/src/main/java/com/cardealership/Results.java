@@ -22,7 +22,7 @@ public class Results extends AppCompatActivity implements CarAdapter.ItemClickLi
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_results);
-        List<Cars> car = (List<Cars>) IntentHelper.getObjectForKey("Cars");
+        List<Cars> car = (List<Cars>) IntentHelper.getObjectForKey("Cars"); //get the Cars obj
         recyclerView = (RecyclerView)  findViewById(R.id.recycler_view);
         recyclerView.addItemDecoration(new MyDividerItemDecoration(this, LinearLayoutManager.VERTICAL, 16));
 
