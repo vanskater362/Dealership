@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.Spinner;
@@ -50,13 +51,18 @@ public class MainActivity extends AppCompatActivity {
         final Spinner makeSpinner = (Spinner) findViewById(R.id.makeSpinner);
         final Spinner yearSpinner = (Spinner) findViewById(R.id.yearSpinner);
         final Spinner colorSpinner = (Spinner) findViewById(R.id.colorSpinner);
-        EditText priceText = (EditText) findViewById(R.id.editPrice);
-        EditText milesText = (EditText) findViewById(R.id.editMiles);
+        final EditText priceText = (EditText) findViewById(R.id.editPrice);
+
         final Switch sunroof = (Switch) findViewById(R.id.sunSwitch);
         final Switch drive = (Switch) findViewById(R.id.fourwdSwitch);
         final Switch window = (Switch) findViewById(R.id.windowSwitch);
         final Switch navi = (Switch) findViewById(R.id.naviSwitch);
         final Switch hotSeats = (Switch) findViewById(R.id.hotSwitch);
+        final CheckBox sunBox = findViewById(R.id.sunBox);
+        final CheckBox driveBox = findViewById(R.id.driveBox);
+        final CheckBox windowBox = findViewById(R.id.powerBox);
+        final CheckBox naviBox = findViewById(R.id.naviBox);
+        final CheckBox hotBox = findViewById(R.id.heatBox);
         Button search = findViewById(R.id.searchButton);
 
         makeSpinner.setAdapter(makesAdapter);
@@ -73,7 +79,12 @@ public class MainActivity extends AppCompatActivity {
                 String make = makeSpinner.getSelectedItem().toString();
                 String year = yearSpinner.getSelectedItem().toString();
                 String color = colorSpinner.getSelectedItem().toString();
-                String query = buildSearchQuery(make, year, color);
+                String price = priceText.getText().toString();
+
+                String query = buildSearchQuery(make, year, color, price, sunroof.isChecked(),
+                        drive.isChecked(),window.isChecked(),navi.isChecked(),hotSeats.isChecked(),
+                        sunBox.isChecked(),driveBox.isChecked(),windowBox.isChecked(),
+                        naviBox.isChecked(),hotBox.isChecked());
 
                 List<Cars> car = db.getSearched(query);
                 IntentHelper.addObjectForKey(car, "Cars");
@@ -171,7 +182,11 @@ public class MainActivity extends AppCompatActivity {
         return colors;
     }
 
-    String buildSearchQuery(String  make, String year, String color){
+    String buildSearchQuery(String make, String year, String color, String price,
+                            boolean sunroof, boolean hasFour, boolean hasPowerWin,
+                            boolean hasNavi, boolean hasHotSeat, boolean sunBox,
+                            boolean driveBox, boolean powerBox, boolean naviBox,
+                            boolean hotBox){
         String select = "SELECT * ";
         String where = " WHERE ";
         String regex = "(, FROM)";
@@ -188,6 +203,25 @@ public class MainActivity extends AppCompatActivity {
             //select += Cars.COLUMN_COLOR + ", ";
             where += Cars.COLUMN_COLOR + " = '" + color + "' AND ";
         }
+        if(!price.isEmpty()){
+            where += Cars.COLUMN_PRICE +  " <= '" + price + "' AND ";
+        }
+        if(sunroof && sunBox){
+            where += Cars.COLUMN_HASSUNROOF + " = " + 1 + " AND ";
+        }
+        if(hasFour && driveBox){
+            where += Cars.COLUMN_ISFOURWHEELDRIVE + " = " + 1 + " AND ";
+        }
+        if(hasPowerWin && powerBox){
+            where += Cars.COLUMN_HASPOWERWINDOWS + " = " + 1 + " AND ";
+        }
+        if(hasNavi && naviBox){
+            where += Cars.COLUMN_HASNAVIGATION + " = " + 1 + " AND ";
+        }
+        if(hasHotSeat && hotBox){
+            where += Cars.COLUMN_HASHEATEDSEATS + " = " + 1 + " AND ";
+        }
+
 
         //select = select.substring(0, select.length() - 2); //remove ", " before adding the next part of the query
         select += " FROM " + Cars.TABLE_NAME;
