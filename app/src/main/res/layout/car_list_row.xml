@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:clickable="true"
+    android:foreground="?attr/selectableItemBackground"
+    >
+
+    <TextView
+        android:id="@+id/make"
+        android:layout_width="183dp"
+        android:layout_height="wrap_content"
+        android:text="make" />
+
+    <TextView
+        android:id="@+id/year"
+        android:layout_width="183dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/make"
+        android:layout_marginTop="0dp"
+        android:text="year" />
+
+    <TextView
+        android:id="@+id/price"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_toEndOf="@+id/year"
+        android:layout_toRightOf="@+id/make"
+        android:text="price" />
+    <TextView
+        android:id="@+id/color"
+        android:layout_width="183dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/price"
+        android:layout_toRightOf="@+id/year"
+        android:layout_marginTop="0dp"
+        android:text="year" />
+
+</RelativeLayout>

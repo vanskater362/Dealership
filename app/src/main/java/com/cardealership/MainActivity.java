@@ -15,6 +15,7 @@ import android.widget.Spinner;
 import android.widget.Switch;
 import android.widget.TextView;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -75,8 +76,9 @@ public class MainActivity extends AppCompatActivity {
                 String query = buildSearchQuery(make, year, color);
 
                 List<Cars> car = db.getSearched(query);
-                Log.d("cars", car.toString());
-                //i.putExtra("cars", car);
+                IntentHelper.addObjectForKey(car, "Cars");
+
+                //i.putExtra("Cars", car);
                 startActivity(i);
             }
         });
